@@ -1,0 +1,57 @@
+
+<form class='container form-control' action="">
+  <input type="text" class='form-label form-control' placeholder="Digite seu nome aqui">
+  <br>
+  <input class='form-label form-control' type="date">
+  <br>
+  <input type="number" placeholder='Quantidade' class='form-label form-control' name='quant' [(ngModel)]="quant"  (blur)='valorTotal()' (blur)='somarFrete()'>
+  <br>
+  <select class='form-select form-control' name='tipo' [(ngModel)]="tipo">
+    <option value="">Selecione Alguma opção</option>
+    <option value="aeronautica">Aeroáutica</option>
+    <option value="camisa_social">Camisa Social</option>
+    <option value="camisa">Camisa</option>
+    <option value="calca">Calça</option>
+  </select>
+  <br>
+  <select class='form-select form-control' (blur) = 'somarFrete()' name='frete' [(ngModel)]="frete">
+    <option value="">Selecione uma região</option>
+    <option value="rj">Rio de Janeiro</option>
+    <option value="outros">Outros</option>
+  </select>
+  <br>
+
+  <div [ngSwitch] = 'frete'>
+    <p *ngSwitchCase = "'rj'">
+      Frete: R$20,00
+    </p>
+    <p *ngSwitchCase = "'outros'">
+      Frete: R$40,00
+    </p>
+    <p *ngSwitchDefault>
+      Frete :
+    </p>
+  </div>
+
+  <br>
+
+  <div [ngSwitch] = 'tipo'>
+    <p *ngSwitchCase = "'aeronautica'">
+      Roupa : Traje da Aeronáutica
+    </p>
+    <p *ngSwitchCase = "'camisa_social'">
+      Roupa: Camisa Social
+    </p>
+    <p *ngSwitchCase = "'camisa'">
+      Roupa : Camisa
+    </p>
+    <p *ngSwitchCase = "'calca'">
+      Roupa : Calça
+    </p>
+    <p *ngSwitchDefault>
+      Roupa :
+    </p>
+  </div>
+  <br>
+  <p>Valor total : R${{somaFrete}}</p>
+</form>
